@@ -8,3 +8,5 @@
 *.out
 
 .idea/
+
+config/.taskchecklist.yaml
