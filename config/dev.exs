@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :taskchecklist, Taskchecklist.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("PG_USER", "postgres"),
+  password: System.get_env("PG_PASS", "postgres"),
   hostname: "localhost",
   database: "taskchecklist_dev",
   stacktrace: true,
