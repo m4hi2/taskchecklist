@@ -1,13 +1,16 @@
 import Config
 
+# Only in tests, remove the complexity from the password hashing algorithm
+config :argon2_elixir, t_cost: 1, m_cost: 8
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :taskchecklist, Taskchecklist.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("PG_USER", "postgres"),
+  password: System.get_env("PG_PASS", "postgres"),
   hostname: "localhost",
   database: "taskchecklist_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
