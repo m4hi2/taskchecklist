@@ -9,6 +9,8 @@ to complete the tasks.
 
 ## Design
 
+### ERD
+
 ```mermaid
 erDiagram
     USERS ||--o{ BLUEPRINTS : create
