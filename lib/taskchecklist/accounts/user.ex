@@ -2,7 +2,10 @@ defmodule Taskchecklist.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  # @derive {Phoenix.Param, key: :id}
   schema "users" do
+    field :name, :string
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
@@ -36,7 +39,7 @@ defmodule Taskchecklist.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :name])
     |> validate_email(opts)
     |> validate_password(opts)
   end

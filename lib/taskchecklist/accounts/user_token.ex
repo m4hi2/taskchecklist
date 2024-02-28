@@ -17,7 +17,7 @@ defmodule Taskchecklist.Accounts.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, Taskchecklist.Accounts.User
+    belongs_to :user, Taskchecklist.Accounts.User, foreign_key: :user_id, type: :binary_id
 
     timestamps(updated_at: false)
   end
