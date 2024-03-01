@@ -13,7 +13,6 @@ to complete the tasks.
 
 ```mermaid
 erDiagram
-    USERS ||--o{ BLUEPRINTS : create
     USERS {
         uuid user_id PK
         text email
@@ -24,27 +23,26 @@ erDiagram
         timestamp inserted_at
         timestamp updated_at
     }
+    USERS ||--o{ BLUEPRINTS : create
+    USERS ||--o{ STEPS_COMPLETIONS : has
+    USERS ||--o{ INGREDIENTS_COMPLETIONS : has
+
     BLUEPRINTS {
       uuid blueprint_id PK
       varchar(255) name
       text description
       bigint user_id FK
       varchar(1) visibility
+      int completion_count
       uuid remixed_from_blueprint_id FK
       timestamp inserted_at
       timestamp updated_at
     }
-    BLUEPRINTS ||--o{ BLUEPRINTS_COMPLETIONS : has
-    USERS ||--o{ BLUEPRINTS_COMPLETIONS : has
-    BLUEPRINTS_COMPLETIONS {
-        uuid completion_id PK
-        uuid user_id FK
-        uuid blueprint_id FK 
-        int completion_count
-        timestamp inserted_at
-        timestamp updated_at
-    }
+    BLUEPRINTS ||--o{ STEPS_COMPLETIONS : has
+    BLUEPRINTS ||--o{ INGREDIENTS_COMPLETIONS : has
     BLUEPRINTS ||--o{ STEPS : has
+    BLUEPRINTS ||--o{ INGREDIENTS : has
+
     STEPS {
         uuid step_id PK
         varchar(255) name
@@ -54,7 +52,7 @@ erDiagram
         timestamp inserted_at
         timestamp updated_at
     }
-    BLUEPRINTS ||--o{ INGREDIENTS : has
+    STEPS ||--o| STEPS_COMPLETIONS : has
     INGREDIENTS {
         uuid ingredient_id PK
         varchar(255) name
@@ -63,6 +61,29 @@ erDiagram
         timestamp inserted_at
         timestamp updated_at
     }
+    INGREDIENTS ||--o| INGREDIENTS_COMPLETIONS : has
+
+    STEPS_COMPLETIONS {
+        uuid completion_id PK
+        uuid user_id FK
+        uuid blueprint_id FK 
+        uuid step_id FK 
+        varchar(1) status
+        timestamp inserted_at
+        timestamp updated_at
+    }
+
+
+    INGREDIENTS_COMPLETIONS {
+        uuid completion_id PK
+        uuid user_id FK
+        uuid blueprint_id FK 
+        uuid ingredient_id FK 
+        varchar(1) status
+        timestamp inserted_at
+        timestamp updated_at
+    }
+
 ```
 
 To start your Phoenix server:
