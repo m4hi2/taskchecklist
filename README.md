@@ -15,7 +15,7 @@ to complete the tasks.
 erDiagram
     USERS ||--o{ BLUEPRINTS : create
     USERS {
-        bigint user_id PK
+        uuid user_id PK
         text email
         varchar(255) hashed_password
         timestamp confirmed_at
@@ -23,31 +23,41 @@ erDiagram
         timestamp updated_at
     }
     BLUEPRINTS {
-      bigint blueprint_id PK
+      uuid blueprint_id PK
       varchar(255) name
       text description
-      int completion_count
       bigint user_id FK
-      bigint remixed_from_blueprint_id FK
+      varchar(1) visibility
+      uuid remixed_from_blueprint_id FK
       timestamp inserted_at
       timestamp updated_at
     }
+    BLUEPRINTS ||--o{ BLUEPRINTS_COMPLETION : has
+    USERS ||--o{ BLUEPRINTS_COMPLETION : has
+    BLUEPRINTS_COMPLETION {
+        uuid completion_id PK
+        uuid user_id FK
+        uuid blueprint_id FK 
+        int completion_count
+        timestamp inserted_at
+        timestamp updated_at
+    }
     BLUEPRINTS ||--o{ STEPS : has
     STEPS {
-        bigint step_id PK
+        uuid step_id PK
         varchar(255) name
         text description
         int step_number
-        bigint blueprint_id FK
+        uuid blueprint_id FK
         timestamp inserted_at
         timestamp updated_at
     }
     BLUEPRINTS ||--o{ INGREDIENTS : has
     INGREDIENTS {
-        bigint ingredient_id PK
+        uuid ingredient_id PK
         varchar(255) name
         int count
-        bigint blueprint_id FK
+        uuid blueprint_id FK
         timestamp inserted_at
         timestamp updated_at
     }
