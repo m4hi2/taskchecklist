@@ -5,8 +5,9 @@ defmodule Taskchecklist.Accounts.User do
   @primary_key {:id, :binary_id, autogenerate: true}
   # @derive {Phoenix.Param, key: :id}
   schema "users" do
-    field :name, :string
     field :email, :string
+    field :first_name, :string
+    field :last_name, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
@@ -39,7 +40,7 @@ defmodule Taskchecklist.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :name])
+    |> cast(attrs, [:email, :password, :first_name, :last_name])
     |> validate_email(opts)
     |> validate_password(opts)
   end

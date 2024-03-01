@@ -32,7 +32,8 @@ defmodule TaskchecklistWeb.UserRegistrationLive do
         </.error>
 
         <.input field={@form[:email]} type="email" label="Email" required />
-        <.input field={@form[:name]} type="text" label="Name" required />
+        <.input field={@form[:first_name]} type="text" label="First Name" required />
+        <.input field={@form[:last_name]} type="text" label="Last Name" required />
 
         <.input field={@form[:password]} type="password" label="Password" required />
 

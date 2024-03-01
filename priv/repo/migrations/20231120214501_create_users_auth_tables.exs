@@ -6,7 +6,8 @@ defmodule Taskchecklist.Repo.Migrations.CreateUsersAuthTables do
 
     create table(:users, primary_key: false) do
       add :id, :uuid, primary_key: true
-      add :name, :string
+      add :first_name, :string, size: 30
+      add :last_name, :string, size: 30
       add :email, :citext, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
