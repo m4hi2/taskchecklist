@@ -34,9 +34,9 @@ erDiagram
       timestamp inserted_at
       timestamp updated_at
     }
-    BLUEPRINTS ||--o{ BLUEPRINTS_COMPLETION : has
-    USERS ||--o{ BLUEPRINTS_COMPLETION : has
-    BLUEPRINTS_COMPLETION {
+    BLUEPRINTS ||--o{ BLUEPRINTS_COMPLETIONS : has
+    USERS ||--o{ BLUEPRINTS_COMPLETIONS : has
+    BLUEPRINTS_COMPLETIONS {
         uuid completion_id PK
         uuid user_id FK
         uuid blueprint_id FK 
