@@ -17,6 +17,8 @@ erDiagram
     USERS {
         uuid user_id PK
         text email
+        varchar(30) first_name
+        varchar(30) last_name
         varchar(255) hashed_password
         timestamp confirmed_at
         timestamp inserted_at
