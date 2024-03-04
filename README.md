@@ -65,6 +65,8 @@ erDiagram
         uuid blueprint_id FK
         uuid user_id FK
         blob progress 
+        timestamp inserted_at
+        timestamp updated_at
     }
 
 
