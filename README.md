@@ -24,8 +24,7 @@ erDiagram
         timestamp updated_at
     }
     USERS ||--o{ BLUEPRINTS : create
-    USERS ||--o{ STEPS_COMPLETIONS : has
-    USERS ||--o{ INGREDIENTS_COMPLETIONS : has
+    USERS ||--o{ BLUEPRINTS_PROGRESSIONS : has
 
     BLUEPRINTS {
       uuid blueprint_id PK
@@ -38,10 +37,9 @@ erDiagram
       timestamp inserted_at
       timestamp updated_at
     }
-    BLUEPRINTS ||--o{ STEPS_COMPLETIONS : has
-    BLUEPRINTS ||--o{ INGREDIENTS_COMPLETIONS : has
     BLUEPRINTS ||--o{ STEPS : has
     BLUEPRINTS ||--o{ INGREDIENTS : has
+    BLUEPRINTS ||--o{ BLUEPRINTS_PROGRESSIONS : has
 
     STEPS {
         uuid step_id PK
@@ -52,7 +50,7 @@ erDiagram
         timestamp inserted_at
         timestamp updated_at
     }
-    STEPS ||--o| STEPS_COMPLETIONS : has
+
     INGREDIENTS {
         uuid ingredient_id PK
         varchar(255) name
@@ -61,28 +59,14 @@ erDiagram
         timestamp inserted_at
         timestamp updated_at
     }
-    INGREDIENTS ||--o| INGREDIENTS_COMPLETIONS : has
 
-    STEPS_COMPLETIONS {
-        uuid completion_id PK
+    BLUEPRINTS_PROGRESSIONS {
+        uuid progression_id PK
+        uuid blueprint_id FK
         uuid user_id FK
-        uuid blueprint_id FK 
-        uuid step_id FK 
-        varchar(1) status
-        timestamp inserted_at
-        timestamp updated_at
+        blob progress 
     }
 
-
-    INGREDIENTS_COMPLETIONS {
-        uuid completion_id PK
-        uuid user_id FK
-        uuid blueprint_id FK 
-        uuid ingredient_id FK 
-        varchar(1) status
-        timestamp inserted_at
-        timestamp updated_at
-    }
 
 ```
 
